@@ -8,6 +8,7 @@ String received = "";
 String varName = "";
 String data = "";
 int split = 0;
+int oldData[4] = {0, 0, 0, 0};
 
 int c = 0, b = 0, d = 0, p = 0;
 
@@ -21,6 +22,8 @@ void setup() {
 }
 
 void loop() {
+  loop:
+  
   processIn();
 
   if(c == 0) { //Calculate Alliance RGB Values
@@ -95,10 +98,25 @@ void processVariables() {
   }
 }
 
+int newData() {
+  if(c != oldData[0] || b != oldData[1] || d != oldData[2] || p != oldData[3]) {
+    oldData[0] = c;
+    oldData[1] = b;
+    oldData[2] = d;
+    oldData[3] = p;
+    
+    return 1;
+  }
+  return 0;
+}
+
 //-------------------------------------------------------LED Code----------------------------------------------------------------------------------------------------
 
 void pulse(uint8_t wait, uint8_t r, uint8_t g, uint8_t b) {
   for(uint8_t i = 100; i > 0; i--) {
+    processIn();
+    if(newData()) {goto loop;}
+    
     strip.clear();
     for(uint8_t j = 0; j < strip.numPixels(); j++) {
       strip.setPixelColor(j, (int)(r*(i/100.0)), (int)(g*(i/100.0)), (int)(b*(i/100.0)));
