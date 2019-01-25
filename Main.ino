@@ -9,7 +9,7 @@ String varName = "";
 String data = "";
 int split = 0;
 
-int c = 0, b = 0, d = 0, p = 0;
+int c = 0, b = 0, d = 0;
 
 int aR = 0, aG = 0, aB = 0;
 
@@ -41,18 +41,7 @@ void loop() {
     monoBeads(1);
   }
   else {
-    if(p == 0) {
-      fastWipe(strip.Color(255, 0, 0));
-    }
-    if(p == 1) {
-      fastWipe(strip.Color(0, 255, 0));
-    }
-    if(p == 2) {
-      fastWipe(strip.Color(0, 0, 255));
-    }
-    if(p == 3) {
-      fastWipe(strip.Color(255, 255, 255));
-    }
+    skittles(1);
   }
 }
 
